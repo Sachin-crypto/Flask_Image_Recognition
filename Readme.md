@@ -4,6 +4,8 @@ This web app is made using Flask framework and is all about predicting the hand 
 
 # Glimpse
 
+https://user-images.githubusercontent.com/72191416/201942790-3dd87d52-03f7-4ed8-93f2-cb0102a2b39e.mp4
+
 # Dependencies
 
 - Flask
