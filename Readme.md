@@ -2,6 +2,13 @@
 
 This web app is made using Flask framework and is all about predicting the hand sign digit images based on the deep learning model trained using transfer learning.
 
+![Python](https://img.shields.io/badge/python-8338ec)
+![Keras](https://img.shields.io/badge/keras-219ebc)
+![Numpy](https://img.shields.io/badge/numpy-ffafcc)
+![Pillow](https://img.shields.io/badge/pillow-00bbf9)
+![Flask](https://img.shields.io/badge/flask-f72585)
+![Bootstrap](https://img.shields.io/badge/bootstrap-57cc99)
+
 # Glimpse
 
 https://user-images.githubusercontent.com/72191416/201943098-c8f5fd8b-ec7d-4e5d-883d-8b69109b946f.mp4
