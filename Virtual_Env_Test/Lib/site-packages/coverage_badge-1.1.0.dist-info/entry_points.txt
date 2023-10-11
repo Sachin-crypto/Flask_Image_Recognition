@@ -1,0 +1,3 @@
+[console_scripts]
+coverage-badge = coverage_badge.__main__:main
+
