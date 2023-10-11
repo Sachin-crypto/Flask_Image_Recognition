@@ -34,11 +34,11 @@ def main():
     Returns:
         str: The rendered HTML content of the 'index.html' page.
     """
-    return render_template("./index.html")
+    return render_template("index.html")
 
 
 # Prediction route
-@app.route('./prediction', methods=['POST'])
+@app.route('/prediction', methods=['POST'])
 def predict_image_file():
     """
     Predicts the content of an uploaded image file and returns the result.
@@ -53,14 +53,16 @@ def predict_image_file():
         if request.method == 'POST':
             img = preprocess_img(request.files['file'].stream)
             pred = predict_result(img)
-            return render_template("result.html", predictions=str(pred))
+            # return render_template("result.html", predictions=str(pred))
+            # return "Successfull"
     except (FileNotFoundError, ValueError) as error_message:
         error = "File cannot be processed: " + str(error_message)
-        return render_template("result.html", err=error)
+        # return render_template("result.html", err=error)
+        # return "Error"
 
     # If none of the conditions above are met, return something consistent.
     # You can replace this with an appropriate default response.
-    return "Some default response"
+    return "Something went wrong!"
 
 
 # Driver code
