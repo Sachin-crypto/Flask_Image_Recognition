@@ -54,11 +54,11 @@ def predict_image_file():
             img = preprocess_img(request.files['file'].stream)
             pred = predict_result(img)
             # return render_template("result.html", predictions=str(pred))
-            # return "Successfull"
+            return "Successfull"
     except (FileNotFoundError, ValueError) as error_message:
         error = "File cannot be processed: " + str(error_message)
         # return render_template("result.html", err=error)
-        # return "Error"
+        return "Error"
 
     # If none of the conditions above are met, return something consistent.
     # You can replace this with an appropriate default response.
