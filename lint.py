@@ -6,7 +6,7 @@ import sys
 
 from pylint import lint
 
-THRESHOLD = 4
+THRESHOLD = 8
 
 run = lint.Run(["app.py"], do_exit=False)
 
