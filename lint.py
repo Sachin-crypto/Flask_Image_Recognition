@@ -8,7 +8,7 @@ from pylint import lint
 
 THRESHOLD = 4
 
-run = lint.Run(["hello_world.py"], do_exit=False)
+run = lint.Run(["app.py"], do_exit=False)
 
 score = run.linter.stats.global_note
 
