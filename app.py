@@ -1,6 +1,9 @@
 # Importing required libs
+from __future__ import annotations
+
 from flask import Flask, render_template, request
-from model import preprocess_img, predict_result
+
+from model import predict_result, preprocess_img
 
 # Instantiating flask app
 app = Flask(__name__)

@@ -1,7 +1,9 @@
 # Importing required libs
+from __future__ import annotations
+
+import numpy as np
 from keras.models import load_model
 from keras.utils import img_to_array
-import numpy as np
 from PIL import Image
 
 # Loading model
