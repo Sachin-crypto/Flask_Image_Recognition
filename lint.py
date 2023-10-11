@@ -7,7 +7,7 @@ from pylint import lint
 
 THRESHOLD = 8
 
-lint.Run(["app.py"], do_exit=False)
+lint.Run(["test_area.py"], do_exit=False)
 score = lint.report.get_global_note()
 
 if score < THRESHOLD:
