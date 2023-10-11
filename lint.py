@@ -1,4 +1,4 @@
-#lint.py
+# lint.py
 
 from __future__ import annotations
 

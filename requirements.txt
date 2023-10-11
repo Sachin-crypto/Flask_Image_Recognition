@@ -3,5 +3,4 @@ keras==2.9.0
 numpy==1.23.2
 Pillow==9.3.0
 
-
 pre-commit
