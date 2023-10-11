@@ -5,4 +5,3 @@ Pillow==9.3.0
 
 
 pre-commit
-tensorflow==2.10.0
