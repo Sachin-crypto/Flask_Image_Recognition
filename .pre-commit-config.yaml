@@ -1,5 +1,5 @@
 repos:
-  - repo: https://github.com/pre-commit/mirrors-pylint
-    rev: main
+  - repo: https://github.com/pylint-dev/pylint
+    rev: v3.0.1
     hooks:
       - id: pylint
