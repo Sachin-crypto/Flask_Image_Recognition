@@ -3,7 +3,7 @@ name: Pytest
 on:
   push:
     branches:
-      - main  # Change to your main branch name
+      - main 
 
 jobs:
   pytest:
@@ -16,7 +16,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: 3.10  # Use the appropriate Python version
+          python-version: 3.10  
 
       - name: Install dependencies
         run: pip install -r requirements.txt
