@@ -1,5 +1,6 @@
 import unittest
 from app import app
+import os
 
 class FlaskImageRecognitionTestCase(unittest.TestCase):
 
@@ -7,18 +8,25 @@ class FlaskImageRecognitionTestCase(unittest.TestCase):
         self.app = app.test_client()
         self.app.testing = True
 
+    def get_test_file_path(self, relative_path):
+        # Construct the absolute path to the file
+        script_dir = os.path.dirname(__file__)
+        return os.path.join(script_dir, relative_path)
+
     def test_main_route(self):
         response = self.app.get('/')
         self.assertEqual(response.status_code, 200)
 
     def test_prediction_route_valid_image(self):
-        with open('C:/Users/Mateo V.G/Flask_Image_Recognition/Flask_Image_Recognition/test_images/2/Sign 2 (97).jpeg', 'rb') as img_file:
+        file_path = self.get_test_file_path('test_images/2/Sign 2 (97).jpeg')
+        with open(file_path, 'rb') as img_file:
             data = {'file': (img_file, 'test.jpg')}
             response = self.app.post('/prediction', data=data, follow_redirects=True)
             self.assertEqual(response.status_code, 200)
 
     def test_prediction_route_invalid_image(self):
-        with open('C:/Users/Mateo V.G/Flask_Image_Recognition/Flask_Image_Recognition/requirements.txt', 'rb') as img_file:
+        file_path = self.get_test_file_path('requirements.txt')
+        with open(file_path, 'rb') as img_file:
             data = {'file': (img_file, 'test.txt')}
             response = self.app.post('/prediction', data=data, follow_redirects=True)
             self.assertEqual(response.status_code, 200)
@@ -39,3 +47,4 @@ class FlaskImageRecognitionTestCase(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
