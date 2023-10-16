@@ -4,7 +4,7 @@ from keras.utils import img_to_array
 import numpy as np
 from PIL import Image
 
-model = load_model("C:/Users/Mateo V.G/Flask_Image_Recognition/Flask_Image_Recognition/digit_model.h5")
+model = load_model("/Flask_Image_Recognition/Flask_Image_Recognition/digit_model.h5")
 
 # Preparing and pre-processing the image
 def preprocess_img(img_path):
