@@ -3,7 +3,7 @@ name: Pylint Check
 on:
   push:
     branches:
-      - main  # Change this to the branch you want to monitor
+      - main  
 
 jobs:
   lint:
