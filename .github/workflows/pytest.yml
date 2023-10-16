@@ -1,45 +1,37 @@
-name: CI
+name: Pylint
 
-# Controls when the action will run. Triggers the workflow on push or pull request
-# events but only for the master branch
 on:
   push:
-    branches: [main, development]
-  pull_request:
-    branches: [main, development]
+    branches:
+      - main  # Change this to the branch you want to monitor
 
-# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  build:
-    strategy:
-      matrix:
-        python-version: [3.8]
+  lint:
+    name: Run Pylint
     runs-on: ubuntu-latest
 
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-          
-      - name: Switch to Current Branch
-        run: git checkout ${{ env.BRANCH }}
-              
-      - name: Set up Python ${{ matrix.python-version }}
-        uses: actions/setup-python@v1
-        with:
-          python-version: ${{ matrix.python-version }}
-          
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          cd key_generator/source
-          pip install -r requirements.txt
-          pip install -e .
+    - name: Check out the code
+      uses: actions/checkout@v2
 
-      - name: Run unit tests
-        run: |
-          cd key_generator/scripts
-          chmod +x run_tests.sh
-          ./run_tests.sh
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8  # You can change this to your preferred Python version
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pylint
+      # You can add more dependencies installation if needed
+
+    - name: Run Pylint
+      run: pylint Flask_Image_Recignition  # Replace 'your_module_or_directory' with your specific module or directory
+
+    - name: Upload Pylint report
+      if: success()
+      uses: actions/upload-artifact@v2
+      with:
+        name: pylint-report
+        path: pylint-report.txt
+
