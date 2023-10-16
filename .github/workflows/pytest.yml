@@ -1,39 +1,24 @@
-name: Pytest Check
-
+name: Run Pytest
 on:
   push:
     branches:
-      - main  # Change this to the branch you want to monitor
+      - main 
 
 jobs:
-  lint:
-    name: Run Pylint
+  pytest:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Check out the code
+    - name: Checkout code
       uses: actions/checkout@v2
 
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: 3.8  
+        python-version: 3.8
 
     - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install pylint
-        
-    - name: Run Pylint on app.py
-      run: pylint app.py
+      run: pip install -r requirements.txt  
 
-    - name: Run Pylint on model.py
-      run: pylint model.py
-
-    - name: Upload Pylint report
-      if: success()
-      uses: actions/upload-artifact@v2
-      with:
-        name: pylint-report
-        path: pylint-report.txt
-
+    - name: Run Pytest
+      run: pytest
