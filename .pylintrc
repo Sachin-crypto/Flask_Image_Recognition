@@ -5,6 +5,8 @@
 # R0903 (function or method takes too few arguments)
 # R0913 (function or method takes too many arguments)
 disable = C0114, C0115, C0116, R0903, R0913
+disable = bare-except
+disable = inconsistent-return-statements
 
 [MASTER]
 # Whitelist Flask extensions to avoid pylint errors.
