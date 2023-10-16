@@ -17,16 +17,18 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: 3.8  # You can change this to your preferred Python version
+        python-version: 3.8  
 
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install pylint
-      # You can add more dependencies installation if needed
+        
+    - name: Run Pylint on app.py
+      run: pylint app.py
 
-    - name: Run Pylint
-      run: pylint .  # Replace 'your_module_or_directory' with your specific module or directory
+    - name: Run Pylint on model.py
+      run: pylint model.py
 
     - name: Upload Pylint report
       if: success()
