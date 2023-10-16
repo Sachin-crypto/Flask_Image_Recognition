@@ -26,7 +26,7 @@ jobs:
       # You can add more dependencies installation if needed
 
     - name: Run Pylint
-      run: pylint Flask_Image_Recognition  # Replace 'your_module_or_directory' with your specific module or directory
+      run: pylint .  # Replace 'your_module_or_directory' with your specific module or directory
 
     - name: Upload Pylint report
       if: success()
