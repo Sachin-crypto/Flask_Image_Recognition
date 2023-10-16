@@ -1,36 +1,45 @@
-name: pytest
+name: CI
 
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
 on:
   push:
-    branches: [ main ]
+    branches: [main, development]
   pull_request:
-    branches: [ main ]
+    branches: [main, development]
 
-permissions:
-  contents: read
-
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
-  test:
-
+  build:
+    strategy:
+      matrix:
+        python-version: [3.8.6]
     runs-on: ubuntu-latest
 
+    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up Python 3.10
-      uses: actions/setup-python@v3
-      with:
-        python-version: "3.10"
-    - uses: actions/cache@v3
-      id: cache
-      with:
-        path: ~/.cache/pip
-        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.*') }}
-        restore-keys: | 
-          ${{ runner.os }}-pip-
-    - name: Install dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt        
-    - name: Run pytest
-      run: | 
-        pytest
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          
+      - name: Switch to Current Branch
+        run: git checkout ${{ env.BRANCH }}
+              
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+          
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          cd key_generator/source
+          pip install -r requirements-dev.txt
+          pip install -e .
+
+      - name: Run unit tests
+        run: |
+          cd key_generator/scripts
+          chmod +x run_tests.sh
+          ./run_tests.sh
