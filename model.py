@@ -1,21 +1,18 @@
 # Importing required libs
-from keras.models import load_model
+from tensorflow.keras.models import load_model
 from keras.utils import img_to_array
-import numpy as np
 from PIL import Image
-
 import os
+import numpy as np
 
 # Define the relative path to the "digit_model.h5" file
-relative_path = 'digit_model.h5'
+RELATIVE_PATH = 'digit_model.h5'
 
 # Get the absolute path to the file
-file_path = os.path.join(os.path.dirname(__file__), relative_path)
+file_path = os.path.join(os.path.dirname(__file__), RELATIVE_PATH)
 
 # Now you can work with the file using file_path
 # For example, if you want to load the model (assuming it's an h5 file):
-from tensorflow.keras.models import load_model
-
 model = load_model(file_path)
 
 # You can use the model in your script
