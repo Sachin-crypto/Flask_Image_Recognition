@@ -1,8 +1,8 @@
 # Importing required libs
+import os
 from tensorflow.keras.models import load_model
 from keras.utils import img_to_array
 from PIL import Image
-import os
 import numpy as np
 
 # Define the relative path to the "digit_model.h5" file
@@ -30,4 +30,3 @@ def preprocess_img(img_path):
 def predict_result(predict):
     pred = model.predict(predict)
     return np.argmax(pred[0], axis=-1)
-
