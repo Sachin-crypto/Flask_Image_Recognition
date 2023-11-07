@@ -1,0 +1,6 @@
+projectKey=Flask_Image_Recognition
+serverUrl=http://sonarqube:9000
+serverVersion=10.2.1.78527
+dashboardUrl=http://sonarqube:9000/dashboard?id=Flask_Image_Recognition
+ceTaskId=AYunZFaMOpr9ZqxzHVin
+ceTaskUrl=http://sonarqube:9000/api/ce/task?id=AYunZFaMOpr9ZqxzHVin
