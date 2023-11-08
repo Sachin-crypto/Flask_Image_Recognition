@@ -1,0 +1,20 @@
+[MESSAGES CONTROL]
+# C0114 (missing-module-docstring)
+# C0115 (missing-class-docstring)
+# C0116 (missing-function-docstring)
+# R0903 (function or method takes too few arguments)
+# R0913 (function or method takes too many arguments)
+# E0401 (import-error)
+# W0702 (bare-except)
+# R1710 (inconsistent-return-statements)
+disable = C0114, C0115, C0116, R0903, R0913, E0401, W0702, R1710
+
+[MASTER]
+# Whitelist Flask extensions to avoid pylint errors.
+extension-pkg-whitelist = flask
+
+[BASIC]
+indent-string = '    '  # 4 spaces
+
+[FORMAT]
+max-line-length = 200
