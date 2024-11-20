@@ -1,11 +1,11 @@
-# tests/test_integration_happy.py
+# test_integration_happy.py
 
-from io import BytesIO 
+from io import BytesIO
 import pytest
 
 def test_successful_prediction(client):
     """Test the successful image upload and prediction."""
-    # Create a mock image file with minimal valid content.
+    # Create a mock image file with minimal valid content
     img_data = BytesIO(b"fake_image_data")
     img_data.name = "test.jpg"
 
@@ -19,4 +19,3 @@ def test_successful_prediction(client):
     # Assertions
     assert response.status_code == 200
     assert b"Prediction" in response.data  # Modify this check based on your output
-
