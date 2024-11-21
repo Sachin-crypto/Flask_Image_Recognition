@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main  # Run on pushes made into the main branch
+  pull_request:
+    branches:
+      - main  # Run on pull requests targeting the main branch
+
+jobs:
+  test:
+    runs-on: ubuntu-latest  # Specify the OS to run the job
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2  # Checks out your repository's code
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'  # Specify the Python version
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt  # Install your project dependencies
+
+      - name: Run tests
+        run: |
+          pytest test_model.py  # Run your tests
