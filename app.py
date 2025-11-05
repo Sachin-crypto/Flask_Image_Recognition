@@ -1,4 +1,3 @@
-# Assignment #3
 """
 Flask application for image prediction.
 
