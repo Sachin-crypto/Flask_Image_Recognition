@@ -1,18 +1,18 @@
 name: CI Pipeline
 
-# Trigger workflow on push or pull request to any branch
+
 on:
   push:
-    branches: [ '*' ]        # All branches
+    branches: [ '*' ]        
   pull_request:
-    branches: [ '*' ]        # PRs to any branch
+    branches: [ '*' ]        
 
 jobs:
   lint-and-test:
     runs-on: ubuntu-latest
 
     steps:
-      # Step 1: Checkout your repository
+
       - name: Checkout code
         uses: actions/checkout@v3
 
@@ -20,21 +20,20 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.10.11'   # Use your project Python version
+          python-version: '3.10.11'   
 
-      # Step 3: Install dependencies
+
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
           pip install pylint pytest
 
-      # Step 4: Run Pylint for code quality
+
       - name: Run Pylint
         run: |
           pylint **/*.py || true
 
-      # Step 5: Run pytest for all tests
+
       - name: Run Tests
-        run: |
-          pytest tests/ --maxfail=1 --disable-warnings -q
+        run: python -m pytest . --disable-warnings -v
