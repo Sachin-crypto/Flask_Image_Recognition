@@ -1,8 +1,15 @@
-# test_integration_sad.py
+"""
+test_integration_sad.py
+
+Integration tests for sad path scenarios of the Flask image prediction application.
+These tests cover:
+
+1. Missing file uploads to the `/prediction` endpoint.
+2. Ensuring the application responds gracefully with an error message.
+"""
 
 import pytest
 from app import app
-from io import BytesIO
 
 @pytest.fixture
 def client():

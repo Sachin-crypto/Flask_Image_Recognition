@@ -1,8 +1,23 @@
-# test_acceptance_edge_cases.py
+"""
+test_acceptance_edge_cases.py
+
+This module contains acceptance tests for edge cases of the Flask image
+prediction application. The tests cover scenarios including:
+
+1. Uploading large image files
+2. Uploading images with missing or incorrect metadata
+3. Uploading images with non-standard file extensions
+4. Sequential uploads to test multi-step processing
+5. Uploading with unexpected headers
+6. Uploading over HTTP/2 protocol
+
+Each test ensures that the application handles these edge cases correctly
+and returns valid prediction responses.
+"""
 
 from io import BytesIO
-import pytest
-from threading import Thread
+# import pytest
+# from threading import Thread
 
 # Helper function for concurrent image uploads
 def upload_image(client, img_data):
