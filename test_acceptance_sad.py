@@ -2,29 +2,43 @@
 test_acceptance_sad.py
 
 This module contains acceptance tests for sad path scenarios of the
-Flask image prediction application. The tests cover:
+Flask image prediction application, integrated with a mock Keras model
+to simulate automated system behavior.
+
+The tests cover:
 
 1. Uploading requests with missing files
 2. Handling invalid or incorrect input data
 
 Each test ensures the application gracefully handles errors and returns
-appropriate responses.
+appropriate responses, while isolating external dependencies via mocks.
 """
 
 import pytest
-from app import app
+from unittest.mock import patch, MagicMock
+
 
 @pytest.fixture
-def client():
+def _client():
     """
-    Fixture for the Flask test client.
+    Fixture for the Flask test client with mocked Keras model.
     - Purpose: Set up a test client for making requests to the Flask app during testing.
-    - Usage: Provides a `client` object to use for HTTP request simulations.
+    - Integration: Mocks the Keras model to isolate the test from the actual ML model,
+      enabling automated system integration testing without requiring the real model.
+    - Usage: Provides a `_client` object to use for HTTP request simulations.
     """
-    with app.test_client() as client:
-        yield client
+    from unittest.mock import patch, MagicMock
+    import app  
 
-def test_acceptance_missing_file(client):
+    with patch("model.load_model") as mock_load_model:
+        mock_model = MagicMock()
+        mock_model.predict.return_value = [[0.1, 0.9]]
+        mock_load_model.return_value = mock_model
+
+        with app.app.test_client() as client:
+            yield client
+
+def test_acceptance_missing_file(_client):
     """
     Test Case: No File Uploaded
     - Purpose: Validate the application's behavior when no file is provided in the upload request.
@@ -32,14 +46,11 @@ def test_acceptance_missing_file(client):
         - Simulate a POST request to the `/prediction` route with no file data.
         - Assert the response status code is 200 (to indicate a valid request was processed).
         - Verify that the response includes an appropriate error message.
+    - Integration: Uses the mocked Keras model to ensure the test focuses on request handling
+      and error response without dependency on the actual model.
     """
-    # Simulate a POST request with no file data
-    response = client.post("/prediction", data={}, content_type="multipart/form-data")
+    response = _client.post("/prediction", data={}, content_type="multipart/form-data")
 
-    # Assertions:
-    # 1. Ensure the response status code is 200, indicating the request was processed.
+
     assert response.status_code == 200
-
-    # 2. Check for a meaningful error message in the response data.
-    #    Modify the message check if your application uses a different error response text.
     assert b"File cannot be processed" in response.data
