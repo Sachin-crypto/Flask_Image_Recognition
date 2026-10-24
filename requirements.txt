@@ -4,3 +4,4 @@ numpy==1.23.2
 Pillow==9.3.0
 tensorflow==2.10.0
 pytest==8.3.3
+Werkzeug==2.2.3
