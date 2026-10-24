@@ -1,31 +1,37 @@
+
 name: CI
 
 on:
   push:
     branches:
-      - main  # Run on pushes made into the main branch
+      - main
   pull_request:
     branches:
-      - main  # Run on pull requests targeting the main branch
+      - main
 
 jobs:
   test:
-    runs-on: ubuntu-latest  # Specify the OS to run the job
+    runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2  # Checks out your repository's code
+      - name: Check out repository
+        uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v5
         with:
-          python-version: '3.9'  # Specify the Python version
+          python-version: "3.10"
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt  # Install your project dependencies
+          python -m pip install -r requirements.txt
+          python -m pip install pylint pytest
 
-      - name: Run tests
+      - name: Run Pylint
         run: |
-          pytest test_model.py  # Run your tests
+          python -m pylint app.py model.py
+
+      - name: Run all tests
+        run: |
+          python -m pytest -v
