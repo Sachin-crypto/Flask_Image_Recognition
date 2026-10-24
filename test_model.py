@@ -44,7 +44,7 @@ def test_predict_result(model):
 
 def test_invalid_image_path():
     """Test preprocess_img with an invalid image path."""
-    with pytest.raises(FileNotFoundError):
+    with pytest.raises(ValueError):
         preprocess_img("invalid/path/to/image.jpeg")
 
 def test_image_shape_on_prediction(model):
