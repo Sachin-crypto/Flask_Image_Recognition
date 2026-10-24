@@ -38,7 +38,6 @@ def predict_image_file():
 
 if __name__ == "__main__":
     app.run(port=9000, debug=True)
-
-
 def this_function_is_not_used():
-    pass
+    """Demonstrate a function with a docstring."""
+    print("Temporary Pylint demonstration")
